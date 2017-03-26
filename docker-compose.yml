@@ -1,7 +1,23 @@
 version: '3'
-
 services:
+
  compile:
+  image: gradle/example
+  build:
+   context: .
+  command: gradle build
+  volumes:
+   - gradle-cache:/home/gradle/.gradle
+   - gradle-cache:/home/gradle/build
+
+ run:
+  image: gradle/example
   build:
    context: .
   command: gradle bootRun
+  volumes:
+   - gradle-cache:/home/gradle/.gradle
+   - gradle-cache:/home/gradle/build
+
+volumes:
+ gradle-cache:
